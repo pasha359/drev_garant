@@ -163,11 +163,11 @@
         <div class="some_photo">
             <div class="row">
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/1.jpg' %}"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/2.jpg' %}"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/3.jpg' %}"></div>
 
             </div>
         </div>
@@ -175,37 +175,24 @@
         <div class="some_photo">
             <div class="row">
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/4.jpg' %}"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/5.jpg' %}"width="270"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
-
+                <img src="{% static 'images/6.jpg' %}"></div>
             </div>
-        </div>
+                <div class="some_photo">
 
-        <div class="some_photo">
             <div class="row">
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/7.jpg' %}"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
+                <img src="{% static 'images/8.jpg' %}"></div>
                 <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
-
+                <img src="{% static 'images/9.jpg' %}"width="360"></div>
             </div>
 
-                    <div class="some_photo">
-            <div class="row">
-                <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
-                <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
-                <div class="col-md-4">
-                <img src="{% static 'images/example.jpg' %}"></div>
 
-            </div>
-        </div>
 
 
 
@@ -249,19 +236,25 @@
 												<h3>Описание Продукции</h3>
 												<div class="row">
 													<div class="col-md-6">
-                                                        {% for ash in wood_ash %}
-                                                            {% if ash.currency == None %}
-														<p>{{ ash.name.capitalize}}, толщина - {{ ash.thickness}} мм., сорт - {{ ash.grade}}, цена - {{ ash.price}}, колличесиво - 1м.куб</p>
+
+                                                    {% for category in query %}
+                                                        {% for wood in category.woods.all %}
+                                                        {% if category.name == 'Доска Ясеня' %}
+                                                            {% if wood.currency == None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                             {% if ash.currency != None %}
-														<p>{{ ash.name.capitalize}}, толщина - {{ ash.thickness}} мм., сорт - {{ ash.grade}}, цена - {{ ash.price}} {{ ash.currency }}, колличесиво - 1м.куб</p>
+                                                            {% if wood.currency != None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}} {{ wood.currency }}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
+                                                        {% endif %}
+                                                        {% endfor %}
                                                     {% endfor %}
+
                                                     </div>
 													<div class="col-md-6">
-														<img src="{% static 'images/ясеня.jpg' %}" alt="">
+														<img src="{% static 'images/ясеня.jpg' %}"width="50%" alt="">
 													</div>
 												</div>
 											</div>
@@ -297,19 +290,25 @@
 												<h3>Доска дуба, для консультации звоните +375 29 3592239</h3>
 												<div class="row">
 													<div class="col-md-6">
-														{% for oak in wood_oak %}
-                                                            {% if oak.currency == None %}
-														<p>{{ oak.name.capitalize}}, толщина - {{ oak.thickness}} мм., сорт - {{ oak.grade}}, цена - {{ oak.price}}, колличесиво - 1м.куб</p>
+
+                                                   {% for category in query %}
+                                                        {% for wood in category.woods.all %}
+                                                        {% if category.name == 'Доска Дуба' %}
+                                                            {% if wood.currency == None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                             {% if oak.currency != None %}
-														<p>{{ oak.name.capitalize}}, толщина - {{ oak.thickness}} мм., сорт - {{ oak.grade}}, цена - {{ oak.price}} {{ oak.currency }}, колличесиво - 1м.куб</p>
+                                                            {% if wood.currency != None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}} {{ wood.currency }}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
+                                                        {% endif %}
+                                                        {% endfor %}
                                                     {% endfor %}
+
 													</div>
 													<div class="col-md-6">
-														<img src="{% static 'images/дуб.jpg' %}" alt="">
+														<img src="{% static 'images/дуб.jpg' %}"width="70%" alt="">
 													</div>
 												</div>
 											</div>
@@ -345,19 +344,24 @@
 												<h3>Доска Лиственных Пород (Береза)</h3>
 												<div class="row">
 													<div class="col-md-6">
-																	{% for birch in wood_birch %}
-                                                            {% if birch.currency == None %}
-														<p>{{ birch.name.capitalize}}, толщина - {{ birch.thickness}} мм., сорт - {{ birch.grade}}, цена - {{ birch.price}}, колличесиво - 1м.куб</p>
+
+                                                    {% for category in query %}
+                                                        {% for wood in category.woods.all %}
+                                                        {% if category.name == 'Доска Лиственных Пород (Береза)' %}
+                                                            {% if wood.currency == None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                             {% if birch.currency != None %}
-														<p>{{ birch.name.capitalize}}, толщина - {{ birch.thickness}} мм., сорт - {{ birch.grade}}, цена - {{ birch.price}} {{ birch.currency }}, колличесиво - 1м.куб</p>
+                                                            {% if wood.currency != None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}} {{ wood.currency }}, колличесиво - 1м.куб</p>
                                                             {% endif %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
 
-                                                    {% endfor %}.
 													</div>
 													<div class="col-md-6">
-														<img src="{% static 'images/береза.jpg' %}" alt="">
+														<img src="{% static 'images/береза.jpg' %}"width="70%" alt="">
 													</div>
 												</div>
 											</div>
@@ -393,18 +397,26 @@
 												<h3>Доска Лиственных Пород (Ольха)</h3>
 												<div class="row">
 													<div class="col-md-6">
-                                                        {% for alder in wood_alder %}
-                                                            {% if alder.currency == None %}
-														<p>{{ alder.name.capitalize}}, толщина - {{ alder.thickness}} мм., сорт - {{ alder.grade}}, цена - {{ alder.price}}, колличесиво - 1м.куб</p>
+
+                                                    {% for category in query %}
+                                                        {% for wood in category.woods.all %}
+                                                        {% if category.name == 'Доска Лиственных Пород (Ольха)' %}
+                                                            {% if wood.currency == None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                             {% if alder.currency != None %}
-														<p>{{ alder.name.capitalize}}, толщина - {{ alder.thickness}} мм., сорт - {{ alder.grade}}, цена - {{ alder.price}} {{ alder.currency }}, колличесиво - 1м.куб</p>
+                                                            {% if wood.currency != None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}} {{ wood.currency }}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                    {% endfor %}													</div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+
+                                                    </div>
+
 													<div class="col-md-6">
-														<img src="{% static 'images/ольха.jpg' %}" alt="">
+														<img src="{% static 'images/ольха.jpg' %}"width="70%" alt="">
 													</div>
 												</div>
 											</div>
@@ -440,18 +452,24 @@
 												<h3>П/М НЕОБРЕЗНЫЕ ХВОЙНЫХ ПОРОД</h3>
 												<div class="row">
 													<div class="col-md-6">
-                                                            {% for needles in wood_needles %}
-                                                            {% if needles.currency == None %}
-														<p>{{ needles.name.capitalize}}, толщина - {{ needles.thickness}} мм., сорт - {{ needles.grade}}, цена - {{ needles.price}}, колличесиво - 1м.куб</p>
+
+                                                    {% for category in query %}
+                                                        {% for wood in category.woods.all %}
+                                                        {% if category.name == 'П/М НЕОБРЕЗНЫЕ ХВОЙНЫХ ПОРОД' %}
+                                                            {% if wood.currency == None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                             {% if needles.currency != None %}
-														<p>{{ needles.name.capitalize}}, толщина - {{ needles.thickness}} мм., сорт - {{ needles.grade}}, цена - {{ needles.price}} {{ needles.currency }}, колличесиво - 1м.куб</p>
+                                                            {% if wood.currency != None %}
+                                                            <p>{{ wood.name.capitalize}}, толщина - {{ wood.thickness}} мм., сорт - {{ wood.grade}}, цена - {{ wood.price}} {{ wood.currency }}, колличесиво - 1м.куб</p>
                                                             {% endif %}
 
-                                                    {% endfor %}													</div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    </div>
 													<div class="col-md-6">
-														<img src="{% static 'images/хвойных_пород.jpg' %}" alt="">
+														<img src="{% static 'images/хвойных_пород.jpg' %}"width="70%" alt="">
 													</div>
 												</div>
 											</div>
