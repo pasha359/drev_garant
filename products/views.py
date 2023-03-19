@@ -1,19 +1,13 @@
 from django.shortcuts import render
-from .models import Wood
+from .models import Category, Wood, Photo
+from django.db.models import Prefetch
 
 def home (request):
-    wood_ash = Wood.objects.filter(category__name='Доска Ясеня')
-    wood_oak = Wood.objects.filter(category__name='Доска Дуба')
-    wood_birch = Wood.objects.filter(category__name='Доска Лиственных Пород (Береза)')
-    wood_alder = Wood.objects.filter(category__name='Доска Лиственных Пород (Ольха)')
-    wood_needles = Wood.objects.filter(category__name='П/М НЕОБРЕЗНЫЕ ХВОЙНЫХ ПОРОД')
+    queryset = Wood.objects.filter(published=True)
+    query = Category.objects.prefetch_related(
+        Prefetch('woods', queryset=queryset))
 
     context = {
-        'wood_ash': wood_ash,
-        'wood_oak': wood_oak,
-        'wood_birch': wood_birch,
-        'wood_alder': wood_alder,
-        'wood_needles': wood_needles
-
-    }
+        'query': query,
+}
     return render(request, 'products/index.html', context)

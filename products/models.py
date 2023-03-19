@@ -43,7 +43,7 @@ class Wood(PublishedMixin):
     price = models.CharField(max_length=100, verbose_name='Цена')
     currency = models.CharField(max_length=20,verbose_name='Валюта', choices=currency, null=True, blank=True)
     unit = models.CharField(max_length=10, choices=unit,default='1m3',verbose_name='Количество')
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE, related_name='woods')
 
     class Meta:
         verbose_name = 'Продукт'
@@ -56,6 +56,18 @@ class Keyword(PublishedMixin):
     class Meta:
         verbose_name = 'Ключевое слово'
         verbose_name_plural = 'Ключевые слова'
+
+    def __str__(self):
+        return self.name
+
+
+class Photo(PublishedMixin):
+    name = models.CharField(max_length=50, verbose_name='Наименование')
+    image = models.ImageField(upload_to='images', blank=True)
+
+    class Meta:
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фото'
 
     def __str__(self):
         return self.name
